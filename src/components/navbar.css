@@ -1,0 +1,31 @@
+nav{
+    background-color: #0d6efd;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    align-items: center;
+    gap: 2rem;
+    padding: 0 1rem;
+}
+nav a{
+    color: lightyellow;
+    font-size: 1.2rem;
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+nav a:hover{
+    background-color: #257cfd;
+    border-radius: 14px;
+}
+
+nav ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 5rem;
+}
