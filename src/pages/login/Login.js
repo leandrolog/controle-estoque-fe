@@ -7,7 +7,7 @@ import {NotifyError, NotifySuccess} from "../../components/Notify";
 import 'react-toastify/dist/ReactToastify.css';
 import HttpRequest from "../../services/HttpRequest";
 
-function Login (){
+function Login() {
 
     const navigate = useNavigate();
     const [email, setEmail] = useState()
@@ -22,10 +22,8 @@ function Login (){
             sessionStorage.setItem('token', token);
             NotifySuccess()
             setTimeout(() => {
-                if (token) {
-                    navigate("/")
-                }
-            }, '1000')
+                navigate('/users')
+            }, 1500)
         } catch (error) {
             NotifyError()
         }

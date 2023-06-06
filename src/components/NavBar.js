@@ -1,8 +1,9 @@
 import './navbar.css'
-import {Alert} from "react-bootstrap";
+import { redirect } from "react-router-dom";
 
 const logOut = async() => {
     await sessionStorage.removeItem('token')
+    return redirect("/login")
 }
 const NavBar = () => {
     return (
