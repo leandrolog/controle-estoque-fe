@@ -1,6 +1,9 @@
 import './navbar.css'
+import {Alert} from "react-bootstrap";
 
-
+const logOut = async() => {
+    await sessionStorage.removeItem('token')
+}
 const NavBar = () => {
     return (
         <nav>
@@ -17,7 +20,7 @@ const NavBar = () => {
             </ul>
             <ul>
                 <a href="/profile">perfil</a>
-                <a href="/login">log out</a>
+                <a href="/login" onClick={logOut}>log out</a>
             </ul>
         </nav>
     )
