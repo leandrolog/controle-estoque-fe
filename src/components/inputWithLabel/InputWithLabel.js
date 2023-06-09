@@ -2,7 +2,7 @@ const InputWithLabel = ({type, defaultValue, title, onChange, placeholder, class
 
     return (
         <div className="input-container">
-            <label className="title">{title}</label>
+            <label className="label-title">{title}</label>
             <input
                 type={type}
                 value={value}

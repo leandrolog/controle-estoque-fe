@@ -8,7 +8,7 @@ function App() {
 
     useEffect(() => {
         const token = sessionStorage.getItem('token')
-        if (!token) {
+        if (!token && window.location.pathname !== '/') {
             return navigate('/login')
         }
 

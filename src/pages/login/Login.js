@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {NotifyError, NotifySuccess} from "../../components/Notify";
 import 'react-toastify/dist/ReactToastify.css';
-import HttpRequest from "../../services/HttpRequest";
+import {HttpRequest} from "../../services/HttpRequest";
 
 function Login() {
 
