@@ -25,7 +25,8 @@ table tr:hover {
     font-size: 50px;
     font-weight: bold;
     color: #333;
-    margin-bottom: 20px;
+    padding-top: 2rem;
+    margin-bottom: 3rem;
 }
 .button-container {
     display: flex;

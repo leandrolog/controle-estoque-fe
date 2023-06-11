@@ -1,8 +1,7 @@
 import './productTable.css'
-import {HttpRequest} from "../../services/HttpRequest";
+import {HttpRequest, role} from "../../services/HttpRequest";
 import {useEffect, useState} from "react";
 import ProductTable from "./ProductTable";
-import {Button} from "react-bootstrap";
 import ModalProducts from "./ModalProducts";
 
 function Products() {
@@ -24,13 +23,17 @@ function Products() {
     return (
         <div>
             <h1 className="title">Items</h1>
-            <div className="button-container">
-                <ModalProducts
-                    getProducts={handleProducts}
-                    data={data}
-                    title="Adicionar"/>
-            </div>
-            <ProductTable getProducts={handleProducts} data={data}/>
+            {role === "ROLE_ADMIN" &&
+                <div className="button-container">
+                    <ModalProducts
+                        getProducts={handleProducts}
+                        data={data}
+                        title="Adicionar"/>
+                </div>
+            }
+            <ProductTable
+                getProducts={handleProducts}
+                data={data}/>
         </div>
     )
 }

@@ -4,7 +4,6 @@ import ModalUsersUpdate from "./ModalUsersUpdate";
 
 function UsersTable({getUsers, data}) {
 
-    console.log("users", data)
     const deleteProduct = async (userId) => {
         try {
             await HttpRequest.delete(`/user/${userId}`);

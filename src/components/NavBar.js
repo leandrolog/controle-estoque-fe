@@ -1,7 +1,8 @@
 import './navbar.css'
-import { redirect } from "react-router-dom";
+import {redirect} from "react-router-dom";
+import {role} from "../services/HttpRequest";
 
-const logOut = async() => {
+const logOut = async () => {
     await sessionStorage.removeItem('token')
     return redirect("/login")
 }
@@ -15,9 +16,11 @@ const NavBar = () => {
                 <li>
                     <a href="/requests">requests</a>
                 </li>
-                <li>
-                    <a href="/users">users</a>
-                </li>
+                {role === "ROLE_ADMIN" &&
+                    <li>
+                        <a href="/users">users</a>
+                    </li>
+                }
             </ul>
             <ul>
                 <a href="/profile">perfil</a>

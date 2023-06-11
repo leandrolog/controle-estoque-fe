@@ -22,7 +22,7 @@ function Login() {
             sessionStorage.setItem('token', token);
             NotifySuccess()
             setTimeout(() => {
-                navigate('/users')
+                navigate('/products')
             }, 1500)
         } catch (error) {
             NotifyError()

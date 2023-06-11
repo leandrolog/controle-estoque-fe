@@ -1,4 +1,4 @@
-const InputWithLabel = ({type, defaultValue, title, onChange, placeholder, className, value}) => {
+const InputWithLabel = ({type, defaultValue, title, onChange, placeholder, className, value, disabled}) => {
 
     return (
         <div className="input-container">
@@ -6,6 +6,7 @@ const InputWithLabel = ({type, defaultValue, title, onChange, placeholder, class
             <input
                 type={type}
                 value={value}
+                disabled={disabled}
                 placeholder={placeholder}
                 onChange={onChange}
                 className={className}

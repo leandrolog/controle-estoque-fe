@@ -3,24 +3,12 @@ import {HttpRequest, role} from "../../services/HttpRequest";
 import {useEffect, useState} from "react";
 import ModalProductsUpdate from "./ModalProductsUpdate";
 
-function ProductTable({getProducts}) {
-
-    const [data, setData] = useState()
-
-    const handleProducts = async () => {
-        try {
-            const response = await HttpRequest.get("/products")
-            setData(response.data.content);
-            console.log(response)
-        } catch (error) {
-            console.error("Erro ao obter os dados da tabela:", error);
-        }
-    }
+function ProductTable({getProducts, data}) {
 
     const deleteProduct = async (productId) => {
         try {
             await HttpRequest.delete(`/product/${productId}`);
-            handleProducts()
+            getProducts()
         } catch (error) {
         }
     };
@@ -52,7 +40,7 @@ function ProductTable({getProducts}) {
                                 modalTitle="Edit product"
                                 data={x}
                                 dataId={x.productId}
-                                update={handleProducts}
+                                update={getProducts}
                             />
                             <button onClick={() => deleteProduct(x.productId)}>delete</button>
                         </div>

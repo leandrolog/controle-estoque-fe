@@ -30,7 +30,9 @@ function Users() {
                     getUsers={handleUsers}
                     title="Adicionar"/>
             </div>
-            <UsersTable getUsers={handleUsers} data={data}/>
+            <UsersTable
+                getUsers={handleUsers}
+                data={data}/>
         </div>
     )
 }
