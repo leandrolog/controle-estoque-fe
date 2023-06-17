@@ -5,8 +5,7 @@ import Button from "react-bootstrap/Button";
 function Home() {
 
     return (
-        <body>
-        <header className="home-header">
+        <div className="home-body">
             <h1 className="title-home">Controle de Inventario</h1>
             <div className="home-button">
                 <a href="/login">
@@ -15,11 +14,7 @@ function Home() {
                     </Button>
                 </a>
             </div>
-        </header>
-        <div className="home-body">
-
         </div>
-        </body>
     )
 }
 

@@ -1,8 +1,9 @@
 import ModalRequest from "./ModalRequest";
 import Card from "./card/Card";
 import {HttpRequest} from "../../services/HttpRequest";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import ReactPaginate from "react-paginate";
+import Paginate from "../../components/reactPaginate/Paginate";
 
 
 function Requests() {
@@ -10,37 +11,25 @@ function Requests() {
     const [data, setData] = useState()
 
     const [pagination, setPagination] = useState();
-    const [pageNumber, setPageNumber] = useState(0);
-    const [currentPage, setCurrentPage] = useState(0);
 
+    const [totalPage, setTotalPage] = useState(0);
     const itemsPerPage = 10;
     const TOTAL = pagination ? pagination.totalPages : 0;
 
-    const handleRequests = async () => {
+    const handleRequests = async (offset) => {
         try {
-            const requests = await HttpRequest.get(`/requests?page=${currentPage}&size=${itemsPerPage}`)
-            const page = requests.data;
+            const requests = await HttpRequest.get(`/requests?page=${offset}&size=${itemsPerPage}`)
+            setTotalPage(requests.data.totalPages);
             console.log("data", requests)
 
             setData(requests.data.content)
-            setPagination(page);
         } catch (error) {
             console.log("erroi", error)
         }
     }
 
-    const [itemOffset, setItemOffset] = useState(0);
-
-    const endOffset = itemOffset + itemsPerPage;
-    const currentItems = data && data.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(data && data.length / itemsPerPage);
-
-    const handlePageClick = (event) => {
-        const newOffset = (event.selected * itemsPerPage) % data.length;
-        console.log(
-            `User requested page number ${event.selected}, which is offset ${newOffset}`
-        );
-        setItemOffset(newOffset);
+    const handlePageClick = ({selected}) => {
+        handleRequests(selected);
     };
 
 
@@ -57,19 +46,9 @@ function Requests() {
             <Card
                 getRequests={handleRequests}
                 data={data}/>
-            <ReactPaginate
-                breakLabel="..."
-                nextLabel="next >"
+            <Paginate
+                pageCount={totalPage}
                 onPageChange={handlePageClick}
-                pageRangeDisplayed={4}
-                pageCount={pageCount}
-                previousLabel="< previous"
-                renderOnZeroPageCount={null}
-                containerClassName="pagination"
-                pageLinkClassName="page-num"
-                previousLinkClassName="page-num"
-                nextLinkClassName="page-num"
-                activeLinkClassName="active"
             />
         </div>
     )

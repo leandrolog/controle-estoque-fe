@@ -2,21 +2,28 @@ import UsersTable from "./UsersTable";
 import {HttpRequest} from "../../services/HttpRequest";
 import {useEffect, useState} from "react";
 import ModalUsers from "./ModalUsers";
+import Paginate from "../../components/reactPaginate/Paginate";
 
 
 function Users() {
 
     const [data, setData] = useState()
+    const [totalPage, setTotalPage] = useState(0);
+    const itemsPerPage = 10;
 
-    const handleUsers = async () => {
+    const handleUsers = async (offset) => {
         try {
-            const response = await HttpRequest.get("/users")
+            const response = await HttpRequest.get(`/users?page=${offset}&size=${itemsPerPage}`)
             setData(response.data.content);
-            console.log(response)
+            setTotalPage(response.data.totalPages);
         } catch (error) {
             console.error("Erro ao obter os dados da tabela:", error);
         }
     }
+    const handlePageClick = ({selected}) => {
+        handleUsers(selected);
+    };
+
     useEffect(() => {
         handleUsers()
     }, [])
@@ -33,6 +40,10 @@ function Users() {
             <UsersTable
                 getUsers={handleUsers}
                 data={data}/>
+            <Paginate
+                pageCount={totalPage}
+                onPageChange={handlePageClick}
+            />
         </div>
     )
 }

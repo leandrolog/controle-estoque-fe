@@ -1,11 +1,4 @@
-.home-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 3rem;
-    background-color: #1E90FF;
-}
+
 .title-home {
     text-align: center;
     margin: 0 auto;
@@ -15,6 +8,4 @@
     right: 0px;
     padding: 10px;
 }
-.home-body{
-    background-color: #4169E1;
-}
+

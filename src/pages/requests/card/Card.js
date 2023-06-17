@@ -31,7 +31,6 @@ function Card({data, getRequests}) {
                         <h4>{x.product.productName}</h4>
                         <h4>{x.quantity}</h4>
                         <h3>{x.reason}</h3>
-
                     </div>
                     <div className="card_footer">
                         <div className="user">
