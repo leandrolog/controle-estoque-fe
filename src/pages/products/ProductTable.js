@@ -12,11 +12,9 @@ function ProductTable({getProducts, data}) {
         } catch (error) {
         }
     };
-
     useEffect(() => {
         getProducts()
     }, [])
-
 
     return (
         <div>
@@ -34,16 +32,16 @@ function ProductTable({getProducts, data}) {
                         <td>{x.supplier}</td>
                         <td>{x.unitPrice}</td>
                         {role === "ROLE_ADMIN" &&
-                        <div className="products-btn">
-                            <ModalProductsUpdate
-                                title="Edit"
-                                modalTitle="Edit product"
-                                data={x}
-                                dataId={x.productId}
-                                update={getProducts}
-                            />
-                            <button onClick={() => deleteProduct(x.productId)}>delete</button>
-                        </div>
+                            <div className="products-btn">
+                                <ModalProductsUpdate
+                                    title="Edit"
+                                    modalTitle="Edit product"
+                                    data={x}
+                                    dataId={x.productId}
+                                    update={getProducts}
+                                />
+                                <button onClick={() => deleteProduct(x.productId)}>delete</button>
+                            </div>
                         }
                     </tr>
                 ))}

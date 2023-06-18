@@ -17,11 +17,74 @@ function Card({data, getRequests}) {
         }
     }
 
+    const canceled = () => {
+        return (
+            <Button className="btn-canceled">Cancelado</Button>
+        )
+    }
+
+    const returned = () => {
+        return (
+            <Button className="btn-closed">Devolvido</Button>
+        )
+    }
+    const accepted = (x) => {
+        return (
+            <div>
+                <small>
+                    <Moment format="YYYY/MM/DD, h:mm:ss">
+                        {x.acceptedAt}
+                    </Moment>
+                </small>
+                <Button
+                    className="btn-return"
+                    onClick={() => requestStatus(x.request_id, "RETURNED")}>
+                    Devolver
+                </Button>
+            </div>
+        )
+    }
+
+    const pending = (x) => {
+        return (
+            <div>
+                <small>
+                    <Moment format="YYYY/MM/DD, h:mm:ss">
+                        {x.createdAt}
+                    </Moment>
+                </small>
+                <Button
+                    className="btn-accept"
+                    onClick={() => requestStatus(x.request_id, "ACCEPTED")}>
+                    Aceitar
+                </Button>
+                <Button
+                    className="btn-cancel"
+                    onClick={() => requestStatus(x.request_id, "CANCELED")}>
+                    cancelar
+                </Button>
+            </div>
+        )
+    }
+
     useEffect(() => {
         getRequests()
         console.log("data", data)
 
     }, [])
+
+    const renderStatus = (x) => {
+        switch(x.status){
+            case 'ACCEPTED':
+                return(accepted(x))
+            case 'CANCELED':
+                return(canceled(x))
+            case 'RETURNED':
+                return(returned(x))
+            case 'PENDING':
+                return(pending(x))
+        }
+    }
 
     return (
         <div className="card-container">
@@ -33,61 +96,15 @@ function Card({data, getRequests}) {
                         <h3>{x.reason}</h3>
                     </div>
                     <div className="card_footer">
-                        <div className="user">
-                            <div className="user_info">
-                                <h5>{x.user.name}</h5>
-
-                                <div>
-                                    {x.status === "CANCELED" ?
-                                        <Button className="btn-canceled">Cancelado</Button>
-                                        :
-                                        <div>
-                                            {x.status === "RETURNED" ?
-                                                <Button
-                                                    className="btn-closed">Devolvido</Button>
-                                                :
-                                                <div>
-                                                    {x.status === "ACCEPTED" ?
-                                                        <div>
-                                                            <small>
-                                                                <Moment format="YYYY/MM/DD, h:mm:ss">
-                                                                    {x.acceptedAt}
-                                                                </Moment>
-                                                            </small>
-                                                            <Button
-                                                                className="btn-return"
-                                                                onClick={() => requestStatus(x.request_id, "RETURNED")}>
-                                                                Devolver
-                                                            </Button>
-                                                        </div>
-                                                        :
-                                                        <div>
-                                                            <small>
-                                                                <Moment format="YYYY/MM/DD, h:mm:ss">
-                                                                    {x.createdAt}
-                                                                </Moment>
-                                                            </small>
-                                                            <Button
-                                                                className="btn-accept"
-                                                                onClick={() => requestStatus(x.request_id, "ACCEPTED")}>
-                                                                Aceitar
-                                                            </Button>
-                                                            <Button
-                                                                className="btn-cancel"
-                                                                onClick={() => requestStatus(x.request_id, "CANCELED")}>
-                                                                cancelar
-                                                            </Button>
-                                                        </div>
-                                                    }
-                                                </div>
-                                            }
-                                        </div>
-                                    }
-                                </div>
+                        <div className="user_info">
+                            <h5>{x.user.name}</h5>
+                            <div>
+                                {
+                                    renderStatus(x)
+                                }
                             </div>
                         </div>
                     </div>
-
                 </div>
             ))}
         </div>
