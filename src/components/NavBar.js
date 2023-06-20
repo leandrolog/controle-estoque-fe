@@ -10,21 +10,20 @@ const NavBar = () => {
     return (
         <nav>
             <ul>
-                <li>
-                    <a href="/products">products</a>
-                </li>
-                <li>
-                    <a href="/requests">requests</a>
-                </li>
                 {role === "ROLE_ADMIN" &&
                     <li>
-                        <a href="/users">users</a>
+                        <a href="/users">Usuários</a>
                     </li>
                 }
+                <li>
+                    <a href="/products">Estoque</a>
+                </li>
+                <li>
+                    <a href="/requests">Controle de Solicitações</a>
+                </li>
             </ul>
             <ul>
-                <a href="/profile">perfil</a>
-                <a href="/login" onClick={logOut}>log out</a>
+                <a href="/login" onClick={logOut}>Sair</a>
             </ul>
         </nav>
     )

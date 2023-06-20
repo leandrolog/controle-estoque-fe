@@ -28,7 +28,7 @@ function Products() {
     };
     return (
         <div>
-            <h1 className="title">Items</h1>
+            <h1 className="title">Estoque</h1>
             {role === "ROLE_ADMIN" && (
                 <div className="button-container">
                     <ModalProducts

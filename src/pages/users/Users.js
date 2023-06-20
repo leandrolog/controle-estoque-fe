@@ -30,7 +30,7 @@ function Users() {
 
     return (
         <div>
-            <h1 className="title">Users</h1>
+            <h1 className="title">Usuários</h1>
             <div className="button-container">
                 <ModalUsers
                     data={data}
