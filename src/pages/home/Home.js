@@ -6,7 +6,6 @@ function Home() {
 
     return (
         <div className="home-body">
-            <h1 className="title-home">Controle de Inventario</h1>
             <div className="home-button">
                 <a href="/login">
                     <Button className="button-home">
