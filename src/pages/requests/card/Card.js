@@ -1,7 +1,7 @@
 import './card.css'
 import {useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
-import {HttpRequest} from "../../../services/HttpRequest";
+import {HttpRequest, role} from "../../../services/HttpRequest";
 import Moment from 'react-moment';
 
 function Card({data, getRequests}) {
@@ -98,11 +98,13 @@ function Card({data, getRequests}) {
                     <div className="card_footer">
                         <div className="user_info">
                             <h5>{x.user.name}</h5>
+                            {role === 'ROLE_ADMIN' &&
                             <div>
                                 {
                                     renderStatus(x)
                                 }
                             </div>
+                            }
                         </div>
                     </div>
                 </div>
