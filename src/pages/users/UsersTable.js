@@ -1,8 +1,11 @@
 import {HttpRequest, role} from "../../services/HttpRequest";
 import {useEffect, useState} from "react";
 import ModalUsersUpdate from "./ModalUsersUpdate";
+import InputFilter from "../../components/filter/InputFilter";
 
 function UsersTable({getUsers, data}) {
+
+    const [filter, setFilter] = useState('')
 
     const deleteProduct = async (userId) => {
         try {
@@ -15,8 +18,25 @@ function UsersTable({getUsers, data}) {
         getUsers()
     }, [])
 
+    const handleFilter = (e) => {
+        setFilter(e.target.value)
+    }
+    const filteredData = data && data.filter((x) => {
+        const userName = x.name.toLowerCase()
+        const userFiltered = filter.toLowerCase()
+
+        return userName.startsWith(userFiltered)
+    })
+
     return (
         <div>
+            <InputFilter
+                title="Filtrar por nome"
+                className="filter-input"
+                type="text"
+                value={filter}
+                onChange={handleFilter}
+            />
             <table className="table">
                 <tr>
                     <th>Nome</th>
@@ -24,7 +44,7 @@ function UsersTable({getUsers, data}) {
                     <th>Setor</th>
                     <th>Cargo</th>
                 </tr>
-                {data && data.map((x, i) => (
+                {filteredData && filteredData.map((x, i) => (
                     <tr key={i}>
                         <td>{x.name}</td>
                         <td>{x.email}</td>
@@ -39,7 +59,6 @@ function UsersTable({getUsers, data}) {
                                     dataId={x.userId}
                                     update={getUsers}
                                 />
-                                <button onClick={() => deleteProduct(x.userId)}>delete</button>
                             </div>
                         }
                     </tr>
