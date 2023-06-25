@@ -44,7 +44,7 @@ function ModalRequest({title, getRequests}) {
     const handleProducts = async () => {
         try {
             const response = await HttpRequest.get("/products")
-            setProducts(response.data.content);
+            setProducts(response.data);
         } catch (error) {
             console.error("Erro ao obter os dados da tabela:", error);
         }

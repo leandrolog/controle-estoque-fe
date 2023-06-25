@@ -28,12 +28,6 @@ table tr:hover {
     padding-top: 2rem;
     margin-bottom: 3rem;
 }
-.button-container {
-    display: flex;
-    align-items: center;
-    padding-left: 10%;
-    margin-bottom: 10px;
-}
 
 .button-container button {
     padding: 10px 20px;
@@ -44,7 +38,6 @@ table tr:hover {
     border-radius: 4px;
     cursor: pointer;
 }
-
 .button-container button:hover {
     background-color: #555;
 }

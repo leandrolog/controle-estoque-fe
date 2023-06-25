@@ -2,9 +2,11 @@ import './productTable.css'
 import {HttpRequest, role} from "../../services/HttpRequest";
 import {useEffect, useState} from "react";
 import ModalProductsUpdate from "./ModalProductsUpdate";
+import InputFilter from "../../components/filter/InputFilter";
 
 function ProductTable({getProducts, data}) {
 
+    const [filter, setFilter] = useState('')
     const deleteProduct = async (productId) => {
         try {
             await HttpRequest.delete(`/product/${productId}`);
@@ -12,12 +14,28 @@ function ProductTable({getProducts, data}) {
         } catch (error) {
         }
     };
+    const filteredData = data && data.filter((x) => {
+        const productName = x.productName.toLowerCase();
+        const filterLowerCase = filter && filter.toLowerCase();
+
+        return productName.startsWith(filterLowerCase);
+    })
+    const handleFilter = (e) => {
+        setFilter(e.target.value)
+    }
     useEffect(() => {
         getProducts()
     }, [])
 
     return (
         <div>
+            <InputFilter
+                title="Filtrar por item"
+                className="filter-input"
+                type="text"
+                value={filter}
+                onChange={handleFilter}
+            />
             <table className="table">
                 <tr>
                     <th>Nome</th>
@@ -25,7 +43,7 @@ function ProductTable({getProducts, data}) {
                     <th>Fornecedor</th>
                     <th>Preço por unidade</th>
                 </tr>
-                {data && data.map((x, i) => (
+                {filteredData && filteredData.map((x, i) => (
                     <tr key={i}>
                         <td>{x.productName}</td>
                         <td>{x.quantity}</td>
@@ -40,7 +58,6 @@ function ProductTable({getProducts, data}) {
                                     dataId={x.productId}
                                     update={getProducts}
                                 />
-                                <button onClick={() => deleteProduct(x.productId)}>delete</button>
                             </div>
                         }
                     </tr>

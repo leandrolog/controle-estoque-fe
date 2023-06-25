@@ -2,8 +2,7 @@ import ModalRequest from "./ModalRequest";
 import Card from "./card/Card";
 import {HttpRequest} from "../../services/HttpRequest";
 import React, {useEffect, useState} from "react";
-import ReactPaginate from "react-paginate";
-import Paginate from "../../components/reactPaginate/Paginate";
+
 
 
 function Requests() {
@@ -18,11 +17,9 @@ function Requests() {
 
     const handleRequests = async (offset) => {
         try {
-            const requests = await HttpRequest.get(`/requests?page=${offset}&size=${itemsPerPage}`)
+            const requests = await HttpRequest.get(`/requests`)
             setTotalPage(requests.data.totalPages);
-            console.log("data", requests)
-
-            setData(requests.data.content)
+            setData(requests.data)
         } catch (error) {
             console.log("erroi", error)
         }
@@ -42,14 +39,13 @@ function Requests() {
             <div>
                 <h1 className="title">Solicitações</h1>
             </div>
-            <ModalRequest getRequests={handleRequests} title="Nova solicitação"/>
+            <div className="button-container">
+                <ModalRequest getRequests={handleRequests} title="Nova solicitação"/>
+            </div>
+
             <Card
                 getRequests={handleRequests}
                 data={data}/>
-            <Paginate
-                pageCount={totalPage}
-                onPageChange={handlePageClick}
-            />
         </div>
     )
 }

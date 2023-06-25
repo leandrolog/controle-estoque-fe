@@ -5,14 +5,14 @@ import ProductTable from "./ProductTable";
 import ModalProducts from "./ModalProducts";
 import Paginate from "../../components/reactPaginate/Paginate";
 function Products() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState();
     const [totalPage, setTotalPage] = useState(0);
     const itemsPerPage = 10;
 
     const handleProducts = async (offset) => {
         try {
-            const response = await HttpRequest.get(`/products?page=${offset}&size=${itemsPerPage}`);
-            setData(response.data.content);
+            const response = await HttpRequest.get(`/products`);
+            setData(response.data);
             setTotalPage(response.data.totalPages);
         } catch (error) {
             console.error("Erro ao obter os dados da tabela:", error);
@@ -39,10 +39,6 @@ function Products() {
                 </div>
             )}
             <ProductTable getProducts={handleProducts} data={data}/>
-            <Paginate
-                pageCount={totalPage}
-                onPageChange={handlePageClick}
-            />
         </div>
     );
 }

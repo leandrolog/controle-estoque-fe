@@ -1,4 +1,4 @@
-import InputWithLabel from "../../components/inputWithLabel/InputWithLabel";
+import './login.css'
 import {ToastContainer} from "react-toastify";
 import {Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
@@ -30,28 +30,32 @@ function Login() {
     }
 
     return (
-        <div className="login">
-            <h1>Login</h1>
+        <body className="login-body">
+        <div className="login-container">
+            <h1 className="login-title">Estoque Flex</h1>
             <ToastContainer position="top-center" closeOnClick pauseOnHover theme="light"/>
-            <form>
-                <InputWithLabel
-                    title="Email:"
+            <form className="login-form">
+                <input
+                    className="login-input"
+                    placeholder="Email"
+                    type="text"
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <InputWithLabel
-                    title="Password:"
+                <input
+                    className="login-input"
+                    placeholder="Senha"
                     type="password"
                     onChange={(e) => setPassword(e.target.value)}
                 />
-
             </form>
             <Button
                 className="btn-in"
                 onClick={handleLogin}
             >
-                Enter
+                Entrar
             </Button>
         </div>
+        </body>
     )
 }
 export default Login;

@@ -2,7 +2,6 @@ import UsersTable from "./UsersTable";
 import {HttpRequest} from "../../services/HttpRequest";
 import {useEffect, useState} from "react";
 import ModalUsers from "./ModalUsers";
-import Paginate from "../../components/reactPaginate/Paginate";
 
 
 function Users() {
@@ -13,8 +12,8 @@ function Users() {
 
     const handleUsers = async (offset) => {
         try {
-            const response = await HttpRequest.get(`/users?page=${offset}&size=${itemsPerPage}`)
-            setData(response.data.content);
+            const response = await HttpRequest.get(`/users`)
+            setData(response.data);
             setTotalPage(response.data.totalPages);
         } catch (error) {
             console.error("Erro ao obter os dados da tabela:", error);
@@ -40,10 +39,6 @@ function Users() {
             <UsersTable
                 getUsers={handleUsers}
                 data={data}/>
-            <Paginate
-                pageCount={totalPage}
-                onPageChange={handlePageClick}
-            />
         </div>
     )
 }
