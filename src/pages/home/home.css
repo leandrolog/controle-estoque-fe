@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 
-.title-home {
-    text-align: center;
-    margin: 0 auto;
+.home-body{
+    display: flex;
 }
 .home-button {
     position: absolute;
@@ -9,3 +9,10 @@
     padding: 10px;
 }
 
+.home-title{
+    font-family: "Indie Flower", sans-serif;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding-top: 30%;
+}

@@ -32,11 +32,9 @@ function ModalProductsUpdate({title, data, dataId, modalTitle , update}) {
             NotifyError()
         }
     }
-
     return (
         <div>
-            <Button onClick={handleOpen}>
-                {title}
+            <Button onClick={handleOpen}>edit
             </Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header>

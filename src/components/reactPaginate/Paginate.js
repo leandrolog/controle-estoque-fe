@@ -3,26 +3,20 @@ import React from "react";
 import ReactPaginate from "react-paginate";
 
 
-function Paginate ({pageCount, onPageChange}){
+function Paginate ({pageCount, handlePageChange}){
 
     return (
         <div>
             <ReactPaginate
-                breakLabel="..."
-                nextLabel="next >"
-                previousLabel="< previous"
+                previousLabel={'Anterior'}
+                nextLabel={'Próximo'}
+                breakLabel={'...'}
                 pageCount={pageCount}
-                onPageChange={onPageChange}
-                containerClassName="pagination-container"
-                activeClassName="active"
-                pageClassName="page-item"
-                pageLinkClassName="page-link"
-                previousClassName="page-item"
-                previousLinkClassName="page-link"
-                nextClassName="page-item"
-                nextLinkClassName="page-link"
-                breakClassName="page-item"
-                breakLinkClassName="page-link"
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={handlePageChange}
+                containerClassName={'pagination'}
+                activeClassName={'active'}
             />
         </div>
     )

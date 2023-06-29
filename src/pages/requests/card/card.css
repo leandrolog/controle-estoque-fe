@@ -60,7 +60,6 @@
     width: 5rem;
     cursor: pointer;
 }
-
 .btn-return {
     background-color: #ff9800;
     color: #fff;
@@ -68,17 +67,18 @@
     width: 5rem;
     cursor: pointer;
 }
-
 .btn-closed {
     background-color: white;
     color: black;
     border: none;
     width: 5rem;
 }
-
 .btn-canceled {
     background-color: #ff5722;
     color: #fff;
     border: none;
     width: 5rem;
+}
+.footer-container small {
+    margin-right: 11.5rem;
 }

@@ -20,12 +20,12 @@ function Login() {
             const response = await HttpRequest.post("/login", credential)
             const token = response.data;
             sessionStorage.setItem('token', token);
-            NotifySuccess()
+            NotifySuccess("Bem vindo!")
             setTimeout(() => {
                 navigate('/products')
             }, 1500)
         } catch (error) {
-            NotifyError()
+            NotifyError("Erro ao entrar")
         }
     }
 

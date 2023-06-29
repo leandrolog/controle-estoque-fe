@@ -3,17 +3,11 @@ import {HttpRequest, role} from "../../services/HttpRequest";
 import {useEffect, useState} from "react";
 import ModalProductsUpdate from "./ModalProductsUpdate";
 import InputFilter from "../../components/filter/InputFilter";
+import Paginate from "../../components/reactPaginate/Paginate";
 
 function ProductTable({getProducts, data}) {
 
     const [filter, setFilter] = useState('')
-    const deleteProduct = async (productId) => {
-        try {
-            await HttpRequest.delete(`/product/${productId}`);
-            getProducts()
-        } catch (error) {
-        }
-    };
     const filteredData = data && data.filter((x) => {
         const productName = x.productName.toLowerCase();
         const filterLowerCase = filter && filter.toLowerCase();
@@ -23,6 +17,16 @@ function ProductTable({getProducts, data}) {
     const handleFilter = (e) => {
         setFilter(e.target.value)
     }
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 10;
+    const pageCount = Math.ceil(filteredData && filteredData.length / itemsPerPage);
+    const offset = currentPage * itemsPerPage;
+    const currentPageItems = filteredData && filteredData.slice(offset, offset + itemsPerPage);
+    const handlePageChange = (selectedPage) => {
+        setCurrentPage(selectedPage.selected);
+    };
+
     useEffect(() => {
         getProducts()
     }, [])
@@ -43,7 +47,7 @@ function ProductTable({getProducts, data}) {
                     <th>Fornecedor</th>
                     <th>Preço por unidade</th>
                 </tr>
-                {filteredData && filteredData.map((x, i) => (
+                {currentPageItems && currentPageItems.map((x, i) => (
                     <tr key={i}>
                         <td>{x.productName}</td>
                         <td>{x.quantity}</td>
@@ -63,6 +67,10 @@ function ProductTable({getProducts, data}) {
                     </tr>
                 ))}
             </table>
+            <Paginate
+                pageCount={pageCount}
+                handlePageChange={handlePageChange}
+            />
         </div>
     )
 }

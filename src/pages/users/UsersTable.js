@@ -2,6 +2,7 @@ import {HttpRequest, role} from "../../services/HttpRequest";
 import {useEffect, useState} from "react";
 import ModalUsersUpdate from "./ModalUsersUpdate";
 import InputFilter from "../../components/filter/InputFilter";
+import Paginate from "../../components/reactPaginate/Paginate";
 
 function UsersTable({getUsers, data}) {
 
@@ -28,6 +29,15 @@ function UsersTable({getUsers, data}) {
         return userName.startsWith(userFiltered)
     })
 
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 10;
+    const pageCount = Math.ceil(filteredData && filteredData.length / itemsPerPage);
+    const offset = currentPage * itemsPerPage;
+    const currentPageItems = filteredData && filteredData.slice(offset, offset + itemsPerPage);
+    const handlePageChange = (selectedPage) => {
+        setCurrentPage(selectedPage.selected);
+    };
+
     return (
         <div>
             <InputFilter
@@ -44,7 +54,7 @@ function UsersTable({getUsers, data}) {
                     <th>Setor</th>
                     <th>Cargo</th>
                 </tr>
-                {filteredData && filteredData.map((x, i) => (
+                {currentPageItems && currentPageItems.map((x, i) => (
                     <tr key={i}>
                         <td>{x.name}</td>
                         <td>{x.email}</td>
@@ -59,11 +69,16 @@ function UsersTable({getUsers, data}) {
                                     dataId={x.userId}
                                     update={getUsers}
                                 />
+                                <button onClick={() => (deleteProduct(x.userId))}>delete</button>
                             </div>
                         }
                     </tr>
                 ))}
             </table>
+            <Paginate
+                handlePageChange={handlePageChange}
+                pageCount={pageCount}
+            />
         </div>
     )
 }

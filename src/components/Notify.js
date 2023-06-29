@@ -1,13 +1,13 @@
 import {toast} from "react-toastify";
 
-export const NotifySuccess = () => toast.success("Bem Vindo!", {
+export const NotifySuccess = (message) => toast.success(message, {
     position: "top-center",
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
     theme: "light",
 });
-export const NotifyError = () => toast.error("Erro ao Entrar!", {
+export const NotifyError = (message) => toast.error(message, {
     position: "top-center",
     hideProgressBar: false,
     closeOnClick: true,

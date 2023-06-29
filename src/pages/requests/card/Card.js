@@ -4,12 +4,12 @@ import Button from "react-bootstrap/Button";
 import {HttpRequest, role} from "../../../services/HttpRequest";
 import Moment from 'react-moment';
 import InputFilter from "../../../components/filter/InputFilter";
+import Paginate from "../../../components/reactPaginate/Paginate";
 
 function Card({data, getRequests}) {
 
     const [filter, setFilter] = useState('')
     const requestStatus = async (requestId, status) => {
-
         const request = {requestId, status}
         try {
             await HttpRequest.post("/request-status", request)
@@ -18,21 +18,33 @@ function Card({data, getRequests}) {
             console.log("error", error)
         }
     }
-
-    const canceled = () => {
+    const canceled = (x) => {
         return (
-            <Button className="btn-canceled">Cancelado</Button>
+            <div className="footer-container">
+                <small>
+                    <Moment format="YYYY/MM/DD, h:mm:ss">
+                        {x.canceledAt}
+                    </Moment>
+                    <Button className="btn-canceled">Cancelado</Button>
+                </small>
+            </div>
         )
     }
-
-    const returned = () => {
+    const returned = (x) => {
         return (
-            <Button className="btn-closed">Devolvido</Button>
+            <div className="footer-container">
+                <small>
+                    <Moment format="YYYY/MM/DD, h:mm:ss">
+                        {x.returned_at}
+                    </Moment>
+                </small>
+                    <Button className="btn-closed">Devolvido</Button>
+            </div>
         )
     }
     const accepted = (x) => {
         return (
-            <div>
+            <div className="footer-container">
                 <small>
                     <Moment format="YYYY/MM/DD, h:mm:ss">
                         {x.acceptedAt}
@@ -49,7 +61,7 @@ function Card({data, getRequests}) {
 
     const pending = (x) => {
         return (
-            <div>
+            <div className="footer-container">
                 <small>
                     <Moment format="YYYY/MM/DD, h:mm:ss">
                         {x.createdAt}
@@ -96,6 +108,15 @@ function Card({data, getRequests}) {
         const statusFiltered = filter && filter.toLowerCase();
         return status.startsWith(statusFiltered)
     })
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 8;
+    const pageCount = Math.ceil(filteredData && filteredData.length / itemsPerPage);
+    const offset = currentPage * itemsPerPage;
+    const currentPageItems = filteredData && filteredData.slice(offset, offset + itemsPerPage);
+    const handlePageChange = (selectedPage) => {
+        setCurrentPage(selectedPage.selected);
+    };
+
 
     return (
         <div>
@@ -107,8 +128,7 @@ function Card({data, getRequests}) {
                 onChange={handleFilter}
             />
             <div className="card-container">
-
-                {filteredData && filteredData.map((x) => (
+                {currentPageItems && currentPageItems.map((x) => (
                     <div className="card">
                         <div className="card_body">
                             <h4>{x.product.productName}</h4>
@@ -119,17 +139,17 @@ function Card({data, getRequests}) {
                             <div className="user_info">
                                 <h5>{x.user.name}</h5>
                                 {role === 'ROLE_ADMIN' &&
-                                    <div>
-                                        {
-                                            renderStatus(x)
-                                        }
-                                    </div>
+                                    <div>{renderStatus(x)}</div>
                                 }
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
+            <Paginate
+                handlePageChange={handlePageChange}
+                pageCount={pageCount}
+            />
         </div>
     )
 

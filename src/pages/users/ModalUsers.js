@@ -6,11 +6,11 @@ import {ModalBody} from "react-bootstrap";
 import {HttpRequest} from "../../services/HttpRequest";
 import {NotifyError, NotifySuccess} from "../../components/Notify";
 import InputWithLabel from "../../components/inputWithLabel/InputWithLabel";
-
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 function ModalUsers({title, getUsers}) {
 
     const [show, setShow] = useState(false)
-
     const handleClose = () => setShow(false)
     const handleOpen = () => setShow(true)
 
@@ -25,18 +25,19 @@ function ModalUsers({title, getUsers}) {
         const request = {name, email, department, password, role}
         try {
             await HttpRequest.post("/new-user", request)
-            NotifySuccess()
+            NotifySuccess("Usuário cadastrado com sucesso!")
             getUsers()
             handleClose()
             console.log("request", request)
 
         } catch (error) {
             console.log("deu erro", error)
-            NotifyError()
+            NotifyError("Erro ao cadastrar usuário!")
         }
     }
     return (
         <div>
+            <ToastContainer position="top-center" closeOnClick pauseOnHover theme="light"/>
             <Button variant="primary" onClick={handleOpen}>{title}</Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header>

@@ -6,6 +6,8 @@ import {ModalBody} from "react-bootstrap";
 import {HttpRequest, user_id} from "../../services/HttpRequest";
 import {NotifyError, NotifySuccess} from "../../components/Notify";
 import InputWithLabel from "../../components/inputWithLabel/InputWithLabel";
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer} from "react-toastify";
 
 function ModalRequest({title, getRequests}) {
 
@@ -30,17 +32,19 @@ function ModalRequest({title, getRequests}) {
         const request = {userId, productId, quantity, reason}
         try {
             await HttpRequest.post("/new-request", request)
-            NotifySuccess()
+            NotifySuccess("Solicitação realizada com sucesso! ")
+            setTimeout(() => {
+            },3000)
+            getRequests()
             handleClose()
             console.log("request", request)
 
         } catch (error) {
             console.log("deu erro", error)
             console.log("request", request)
-            NotifyError()
+            NotifyError("Erro ao realizar solicitação")
         }
     }
-
     const handleProducts = async () => {
         try {
             const response = await HttpRequest.get("/products")
@@ -53,9 +57,9 @@ function ModalRequest({title, getRequests}) {
         handleProducts()
     }, [])
 
-
     return (
         <div>
+            <ToastContainer position="top-center" closeOnClick pauseOnHover theme="light"/>
             <Button variant="primary" onClick={handleOpen}>{title}</Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header>

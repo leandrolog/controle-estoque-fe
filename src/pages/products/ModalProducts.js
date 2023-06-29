@@ -7,7 +7,8 @@ import {ModalBody} from "react-bootstrap";
 import {HttpRequest} from "../../services/HttpRequest";
 import {NotifyError, NotifySuccess} from "../../components/Notify";
 import InputWithLabel from "../../components/inputWithLabel/InputWithLabel";
-
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer} from "react-toastify";
 function  ModalProducts({title, getProducts}) {
 
     const [show, setShow] = useState(false)
@@ -25,18 +26,17 @@ function  ModalProducts({title, getProducts}) {
         const request = {productName, quantity, unitPrice, supplier}
         try {
             await HttpRequest.post("/new-product", request)
-            NotifySuccess()
+            NotifySuccess("Produto cadastrado com sucesso!")
             getProducts()
             handleClose()
         } catch (error) {
             console.log("deu erro", error)
-            NotifyError()
+            NotifyError("Erro ao cadastrar produto")
         }
     }
-
-
     return (
         <div>
+            <ToastContainer position="top-center" closeOnClick pauseOnHover theme="light"/>
             <Button variant="primary" onClick={handleOpen}>{title}</Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header>
