@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
 import {HttpRequest, role} from "../../../services/HttpRequest";
 import Moment from 'react-moment';
+import 'moment-timezone';
 import InputFilter from "../../../components/filter/InputFilter";
 import Paginate from "../../../components/reactPaginate/Paginate";
 
@@ -22,7 +23,7 @@ function Card({data, getRequests}) {
         return (
             <div className="footer-container">
                 <small>
-                    <Moment format="YYYY/MM/DD, h:mm:ss">
+                    <Moment format="YYYY/MM/DD, HH:mm:ss">
                         {x.canceledAt}
                     </Moment>
                     <Button className="btn-canceled">Cancelado</Button>
@@ -34,7 +35,7 @@ function Card({data, getRequests}) {
         return (
             <div className="footer-container">
                 <small>
-                    <Moment format="YYYY/MM/DD, h:mm:ss">
+                    <Moment format="YYYY/MM/DD, HH:mm:ss">
                         {x.returned_at}
                     </Moment>
                 </small>
@@ -46,7 +47,7 @@ function Card({data, getRequests}) {
         return (
             <div className="footer-container">
                 <small>
-                    <Moment format="YYYY/MM/DD, h:mm:ss">
+                    <Moment format="YYYY/MM/DD, HH:mm:ss" >
                         {x.acceptedAt}
                     </Moment>
                 </small>
@@ -63,7 +64,7 @@ function Card({data, getRequests}) {
         return (
             <div className="footer-container">
                 <small>
-                    <Moment format="YYYY/MM/DD, h:mm:ss">
+                    <Moment format="YYYY/MM/DD, HH:mm:ss">
                         {x.createdAt}
                     </Moment>
                 </small>

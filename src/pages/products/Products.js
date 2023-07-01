@@ -7,7 +7,8 @@ import ModalProducts from "./ModalProducts";
 function Products() {
     const [data, setData] = useState();
 
-    const handleProducts = async (offset) => {
+    const handleProducts = async () => {
+
         try {
             const response = await HttpRequest.get(`/products`);
             setData(response.data);
@@ -15,14 +16,9 @@ function Products() {
             console.error("Erro ao obter os dados da tabela:", error);
         }
     };
-
     useEffect(() => {
-        handleProducts()
+            handleProducts()
     }, []);
-
-    const handlePageClick = ({selected}) => {
-        handleProducts(selected);
-    };
     return (
         <div>
             <h1 className="title">Estoque</h1>

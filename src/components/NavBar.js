@@ -23,7 +23,7 @@ const NavBar = () => {
                 </li>
             </ul>
             <ul>
-                <a href="/login" onClick={logOut}>Sair</a>
+                <a href="/" onClick={logOut}>Sair</a>
             </ul>
         </nav>
     )

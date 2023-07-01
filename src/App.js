@@ -9,7 +9,7 @@ function App() {
     useEffect(() => {
         const token = sessionStorage.getItem('token')
         if (!token) {
-            return navigate('/login')
+            return navigate('/')
         }
 
     }, [])

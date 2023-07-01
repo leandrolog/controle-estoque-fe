@@ -9,17 +9,12 @@ import Users from "./pages/users/Users";
 import App from "./App";
 import NavBar from "./components/NavBar";
 import Profile from "./pages/profile/Profile";
-import Home from "./pages/home/Home";
 
 
 const router = createBrowserRouter([
     {
         element: <App/>,
         children: [
-            {
-                path: "/login",
-                element:<Login/>
-            },
             {
                 path: "/",
                 element:<Login/>
