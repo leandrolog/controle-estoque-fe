@@ -63,13 +63,13 @@ function UsersTable({getUsers, data}) {
                         {role === "ROLE_ADMIN" &&
                             <div className="products-btn">
                                 <ModalUsersUpdate
-                                    title="Edit"
+                                    title="Editar"
                                     modalTitle="Edit product"
                                     data={x}
                                     dataId={x.userId}
                                     update={getUsers}
                                 />
-                                <button onClick={() => (deleteProduct(x.userId))}>delete</button>
+                                <button onClick={() => (deleteProduct(x.userId))}>Deletar</button>
                             </div>
                         }
                     </tr>
