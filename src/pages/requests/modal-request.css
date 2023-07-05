@@ -1,0 +1,16 @@
+.option-container{
+    display: flex;
+}
+.option-container select{
+    justify-content: center;
+    margin-left: 10px;
+    width: 67%;
+    padding: 0.6rem 0.5rem;
+}
+.option-container label {
+    display: flex;
+    color: white;
+    justify-content: left;
+    font-size: 25px;
+    width: 25%;
+}

@@ -25,11 +25,10 @@ const NavBar = () => {
       </ul>
       <ul className="logout-container">
         <li>
-          <a href="/login" onClick={logOut}>Sair</a>
+          <a href="/" onClick={logOut}>Sair</a>
         </li>
       </ul>
     </nav>
   );
 };
-
 export default NavBar;

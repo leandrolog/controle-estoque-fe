@@ -1,3 +1,4 @@
+import './modal-request.css'
 import React, {useEffect} from "react";
 import {useState} from "react";
 import Button from 'react-bootstrap/Button';
@@ -87,8 +88,8 @@ function ModalRequest({title, getRequests}) {
                             onChange={(e) => setReason(e.target.value)}
                             className="input"
                         />
-                        <div>
-                            <button onClick={handleDropDown}>Items</button>
+                        <div className="option-container">
+                            <label>produto</label>
                             {products && (
                                 <select onChange={(e) => setProductId(e.target.value)}>
                                     <p>Selecione um produto</p>
